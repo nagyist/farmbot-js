@@ -84,10 +84,18 @@ export interface Log {
   channels: ALLOWED_CHANNEL_NAMES[];
 }
 
+export type PeripheralType =
+  | "none"
+  | "lighting"
+  | "rotary_tool"
+  | "vacuum"
+  | "water"
+
 export interface Peripheral extends ResourceBase {
   pin: number | undefined;
   mode: number;
   label: string;
+  type: PeripheralType;
 }
 
 interface PinBindingBase extends ResourceBase { pin_num: number; }
@@ -147,11 +155,22 @@ export interface PlantPointer extends BasePoint {
   height_curve_id?: number;
 }
 
+export enum MountStage {
+  NONE = 0,
+  X = 1,
+  Y = 2,
+  Z = 3,
+}
+
 export interface ToolSlotPointer extends BasePoint {
   pointer_type: "ToolSlot";
   tool_id: number | undefined;
   pullout_direction: ToolPulloutDirection;
   gantry_mounted: boolean;
+  mount_stage: MountStage;
+  mount_offset_x: number;
+  mount_offset_y: number;
+  mount_offset_z: number;
 }
 
 export interface GenericPointer extends BasePoint {
@@ -194,10 +213,17 @@ export interface SavedGarden extends ResourceBase {
   notes?: string;
 }
 
+export type SensorType =
+  | "none"
+  | "soil_moisture"
+  | "tool_verification"
+  | "current";
+
 export interface Sensor extends ResourceBase {
   pin: number | undefined;
   mode: number;
   label: string;
+  type: SensorType;
 }
 
 export interface SensorReading extends ResourceBase {
@@ -226,10 +252,25 @@ export interface Telemetry {
   firmware_hardware?: string;
 }
 
+export type ToolType =
+  | "none"
+  | "rotary_tool"
+  | "seed_bin"
+  | "seed_tray"
+  | "seed_trough"
+  | "seeder"
+  | "soil_sensor"
+  | "watering_nozzle"
+  | "weeder";
+
 export interface Tool extends ResourceBase {
   name?: string;
   flow_rate_ml_per_s: number;
   seeder_tip_z_offset: number;
+  type: ToolType;
+  effector_offset_x: number;
+  effector_offset_y: number;
+  effector_offset_z: number;
 }
 
 export interface WebcamFeed extends ResourceBase {
@@ -255,9 +296,14 @@ export interface SequenceResource extends Sequence, ResourceBase {
   copyright?: string;
 }
 
+export type CurveType =
+  | "water"
+  | "spread"
+  | "height";
+
 export interface Curve extends ResourceBase {
   name: string;
-  type: "water" | "spread" | "height";
+  type: CurveType;
   data: Record<number, number>;
 }
 

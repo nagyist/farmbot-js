@@ -1,6 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.PinBindingSpecialAction = exports.PinBindingType = exports.ToolPulloutDirection = void 0;
+exports.MountStage = exports.PinBindingSpecialAction = exports.PinBindingType = exports.ToolPulloutDirection = void 0;
 var ToolPulloutDirection;
 (function (ToolPulloutDirection) {
     ToolPulloutDirection[ToolPulloutDirection["NONE"] = 0] = "NONE";
@@ -24,3 +24,10 @@ var PinBindingSpecialAction;
     PinBindingSpecialAction["read_status"] = "read_status";
     PinBindingSpecialAction["take_photo"] = "take_photo";
 })(PinBindingSpecialAction || (exports.PinBindingSpecialAction = PinBindingSpecialAction = {}));
+var MountStage;
+(function (MountStage) {
+    MountStage[MountStage["NONE"] = 0] = "NONE";
+    MountStage[MountStage["X"] = 1] = "X";
+    MountStage[MountStage["Y"] = 2] = "Y";
+    MountStage[MountStage["Z"] = 3] = "Z";
+})(MountStage || (exports.MountStage = MountStage = {}));
