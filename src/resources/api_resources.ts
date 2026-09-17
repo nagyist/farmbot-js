@@ -271,6 +271,7 @@ export interface Tool extends ResourceBase {
   effector_offset_x: number;
   effector_offset_y: number;
   effector_offset_z: number;
+  utm_mountable: boolean;
 }
 
 export interface WebcamFeed extends ResourceBase {
